@@ -1,0 +1,71 @@
+# import tkinter as tk
+#
+# win = tk.Tk()
+# win.title('Кофемашина')
+# win.geometry('500x600+600+100')
+# win.resizable(False, False)
+# win.mainloop()
+
+class StorageIngridients:
+    count_drink = {'americano': {'water': 10, 'coffee': 10, 'milk': 0, 'syrup': 0},
+                   'espresso': {'water': 5, 'coffee': 10, 'milk': 0, 'syrup': 0},
+                   'cappuccino': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 0},
+                   'raf': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 5}}
+
+    ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 100}
+
+    # def __init__(self, water=100, coffee=100, syrup=100, milk=100):
+    #     self.water = water
+    #     self.coffee = coffee
+    #     self.syrup = syrup
+    #     self.milk = milk
+
+    def cost_drink(self, drink):
+        for a, b in self.ingridients.items():
+            self.ingridients[a] -= self.count_drink[drink][a]
+
+
+class StorageMoney:
+    def __init__(self, money_storage=0):
+        self.money_storage = money_storage
+
+    def sale(self, revenue):
+        self.money_storage += revenue
+
+
+class Buyer:
+    def __init__(self, money=100):
+        self.money = money
+
+    def buy(self, cost):
+        self.money -= cost
+
+
+class CoffeeMachine:
+    cost_drinks = {'americano': 10,
+                   'espresso': 5,
+                   'cappuccino': 20,
+                   'raf': 20}
+
+    def __init__(self):
+        self.ingridients = StorageIngridients()
+        self.buyer = Buyer()
+        self.storage_money = StorageMoney()
+
+    def americano(self):
+        self.storage_money.sale(self.cost_drinks['americano'])
+        self.buyer.buy(self.cost_drinks['americano'])
+        self.ingridients.cost_drink('americano')
+
+    def start(self):
+        start = input("Enter the drink you would like: \n 1. americano \n 2. espresso \n 3. cappuccino \n 4. raf \n")
+
+        if start == "1":
+            self.americano()
+            print(self.ingridients)
+
+
+coffee = CoffeeMachine()
+
+while True:
+    coffee.start()
