@@ -10,7 +10,7 @@ class StorageIngridients:
     count_drink = {'americano': {'water': 10, 'coffee': 10, 'milk': 0, 'syrup': 0},
                    'espresso': {'water': 5, 'coffee': 10, 'milk': 0, 'syrup': 0},
                    'cappuccino': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 0},
-                   'raf': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 5}}
+                   'raf': {'water': 5, 'coffee': 50, 'milk': 10, 'syrup': 5}}
 
     ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 100}
 
@@ -25,7 +25,10 @@ class StorageIngridients:
 
     def cost_drink(self, drink):
         for a, b in self.ingridients.items():
-            self.ingridients[a] -= self.count_drink[drink][a]
+            if self.ingridients[a] >= self.count_drink[drink][a]:
+                self.ingridients[a] -= self.count_drink[drink][a]
+            else:
+                print(f'недостаточно ингридиента {a}')
 
 
 class StorageMoney:
@@ -60,6 +63,7 @@ class CoffeeMachine:
         self.ingridients = StorageIngridients()
         self.buyer = Buyer()
         self.storage_money = StorageMoney()
+        self.can_cook = True
 
     def americano(self):
         self.storage_money.sale(self.cost_drinks['americano'])
@@ -92,6 +96,9 @@ class CoffeeMachine:
         print(self.ingridients)
         print(self.buyer)
         print(self.storage_money)
+
+    def check(self):
+        ...
 
     def start(self):
         start = input("Enter the drink you would like: \n 1. americano \n 2. espresso \n 3. cappuccino \n 4. raf \n")
