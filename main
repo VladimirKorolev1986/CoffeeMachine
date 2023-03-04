@@ -14,6 +14,9 @@ class StorageIngridients:
 
     ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 100}
 
+    def __str__(self):
+        return f'ingridients - {self.ingridients}'
+
     # def __init__(self, water=100, coffee=100, syrup=100, milk=100):
     #     self.water = water
     #     self.coffee = coffee
@@ -32,6 +35,9 @@ class StorageMoney:
     def sale(self, revenue):
         self.money_storage += revenue
 
+    def __str__(self):
+        return f'money_storage - {self.money_storage}'
+
 
 class Buyer:
     def __init__(self, money=100):
@@ -39,6 +45,9 @@ class Buyer:
 
     def buy(self, cost):
         self.money -= cost
+
+    def __str__(self):
+        return f'money - {self.money}'
 
 
 class CoffeeMachine:
@@ -56,13 +65,45 @@ class CoffeeMachine:
         self.storage_money.sale(self.cost_drinks['americano'])
         self.buyer.buy(self.cost_drinks['americano'])
         self.ingridients.cost_drink('americano')
+        print(self.ingridients)
+        print(self.buyer)
+        print(self.storage_money)
+
+    def espresso(self):
+        self.storage_money.sale(self.cost_drinks['espresso'])
+        self.buyer.buy(self.cost_drinks['espresso'])
+        self.ingridients.cost_drink('espresso')
+        print(self.ingridients)
+        print(self.buyer)
+        print(self.storage_money)
+
+    def cappuccino(self):
+        self.storage_money.sale(self.cost_drinks['cappuccino'])
+        self.buyer.buy(self.cost_drinks['cappuccino'])
+        self.ingridients.cost_drink('cappuccino')
+        print(self.ingridients)
+        print(self.buyer)
+        print(self.storage_money)
+
+    def raf(self):
+        self.storage_money.sale(self.cost_drinks['raf'])
+        self.buyer.buy(self.cost_drinks['raf'])
+        self.ingridients.cost_drink('raf')
+        print(self.ingridients)
+        print(self.buyer)
+        print(self.storage_money)
 
     def start(self):
         start = input("Enter the drink you would like: \n 1. americano \n 2. espresso \n 3. cappuccino \n 4. raf \n")
 
         if start == "1":
             self.americano()
-            print(self.ingridients)
+        elif start == "2":
+            self.espresso()
+        elif start == "3":
+            self.cappuccino()
+        elif start == "4":
+            self.raf()
 
 
 coffee = CoffeeMachine()
