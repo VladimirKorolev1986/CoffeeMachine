@@ -63,8 +63,9 @@ class CoffeeMachine:
 
     def check(self, drink):
         for a, b in self.ingridient.ingridients.items():
-            if self.ingridient.ingridients[a] >= self.ingridient.count_drink[drink][a]:
-                return True
+            if self.ingridient.ingridients[a] < self.ingridient.count_drink[drink][a]:
+                return False
+        return True
 
     def americano(self):
         self.buyer.buy(self.cost_drinks['americano'])
@@ -130,3 +131,4 @@ coffee = CoffeeMachine()
 
 while True:
     coffee.start()
+
