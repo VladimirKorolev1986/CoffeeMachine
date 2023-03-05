@@ -1,11 +1,3 @@
-# import tkinter as tk
-#
-# win = tk.Tk()
-# win.title('Кофемашина')
-# win.geometry('500x600+600+100')
-# win.resizable(False, False)
-# win.mainloop()
-
 class StorageIngridients:
     count_drink = {'americano': {'water': 10, 'coffee': 10, 'milk': 0, 'syrup': 0},
                    'espresso': {'water': 5, 'coffee': 10, 'milk': 0, 'syrup': 0},
@@ -63,37 +55,14 @@ class CoffeeMachine:
                 return False
         return True
 
-    def americano(self):
-        self.buyer.buy(self.cost_drinks['americano'])
-        self.storage_money.sale(self.cost_drinks['americano'])
-        self.ingridient.cost_drink('americano')
+    def cook(self, drink):
+        self.buyer.buy(self.cost_drinks[drink])
+        self.storage_money.sale(self.cost_drinks[drink])
+        self.ingridient.cost_drink(drink)
         print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
 
-    def espresso(self):
-        self.storage_money.sale(self.cost_drinks['espresso'])
-        self.buyer.buy(self.cost_drinks['espresso'])
-        self.ingridient.cost_drink('espresso')
-        print(self.ingridient)
-        print(self.buyer)
-        print(self.storage_money)
-
-    def cappuccino(self):
-        self.storage_money.sale(self.cost_drinks['cappuccino'])
-        self.buyer.buy(self.cost_drinks['cappuccino'])
-        self.ingridient.cost_drink('cappuccino')
-        print(self.ingridient)
-        print(self.buyer)
-        print(self.storage_money)
-
-    def raf(self):
-        self.storage_money.sale(self.cost_drinks['raf'])
-        self.buyer.buy(self.cost_drinks['raf'])
-        self.ingridient.cost_drink('raf')
-        print(self.ingridient)
-        print(self.buyer)
-        print(self.storage_money)
 
     def start(self):
         print(self.check('raf'))
@@ -110,13 +79,15 @@ class CoffeeMachine:
         start = input('Введите номер напитка: \n')
 
         if start == "1":
-            self.americano()
+            self.cook('americano')
         elif start == "2":
-            self.espresso()
+            self.cook('espresso')
         elif start == "3":
-            self.cappuccino()
+            self.cook('cappuccino')
         elif start == "4":
-            self.raf()
+            self.cook('raf')
+        else:
+            raise 'Неверно введен номер напитка'
 
 
 coffee = CoffeeMachine()
