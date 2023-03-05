@@ -43,8 +43,8 @@ class Buyer:
 class CoffeeMachine:
     cost_drinks = {'americano': 10,
                    'espresso': 5,
-                   'cappuccino': 20,
-                   'raf': 50}
+                   'cappuccino': 5,
+                   'raf': 5}
 
     def __init__(self):
         self.ingridient = StorageIngridients()
@@ -64,6 +64,8 @@ class CoffeeMachine:
         print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
+
+
 
     def start(self):
         print(self.check('raf'))
