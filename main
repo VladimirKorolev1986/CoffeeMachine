@@ -12,23 +12,18 @@ class StorageIngridients:
                    'cappuccino': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 0},
                    'raf': {'water': 5, 'coffee': 50, 'milk': 10, 'syrup': 5}}
 
-    ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 100}
-
-    def __str__(self):
-        return f'ingridients - {self.ingridients}'
-
-    # def __init__(self, water=100, coffee=100, syrup=100, milk=100):
-    #     self.water = water
-    #     self.coffee = coffee
-    #     self.syrup = syrup
-    #     self.milk = milk
+    ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 0}
 
     def cost_drink(self, drink):
         for a, b in self.ingridients.items():
             if self.ingridients[a] >= self.count_drink[drink][a]:
                 self.ingridients[a] -= self.count_drink[drink][a]
+                return True
             else:
-                print(f'недостаточно ингридиента {a}')
+                return False
+
+    def __str__(self):
+        return f'ingridients - {self.ingridients}'
 
 
 class StorageMoney:
@@ -47,7 +42,9 @@ class Buyer:
         self.money = money
 
     def buy(self, cost):
-        self.money -= cost
+        if self.money >= cost:
+            self.money -= cost
+            return True
 
     def __str__(self):
         return f'money - {self.money}'
@@ -60,48 +57,64 @@ class CoffeeMachine:
                    'raf': 20}
 
     def __init__(self):
-        self.ingridients = StorageIngridients()
+        self.ingridient = StorageIngridients()
         self.buyer = Buyer()
         self.storage_money = StorageMoney()
-        self.can_cook = True
+
+    def check(self, drink):
+        for a, b in self.ingridient.ingridients.items():
+            if self.ingridient.ingridients[a] >= self.ingridient.count_drink[drink][a]:
+                return True
 
     def americano(self):
-        self.storage_money.sale(self.cost_drinks['americano'])
         self.buyer.buy(self.cost_drinks['americano'])
-        self.ingridients.cost_drink('americano')
-        print(self.ingridients)
+        self.storage_money.sale(self.cost_drinks['americano'])
+        self.ingridient.cost_drink('americano')
+        print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
 
     def espresso(self):
         self.storage_money.sale(self.cost_drinks['espresso'])
         self.buyer.buy(self.cost_drinks['espresso'])
-        self.ingridients.cost_drink('espresso')
-        print(self.ingridients)
+        self.ingridient.cost_drink('espresso')
+        print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
 
     def cappuccino(self):
         self.storage_money.sale(self.cost_drinks['cappuccino'])
         self.buyer.buy(self.cost_drinks['cappuccino'])
-        self.ingridients.cost_drink('cappuccino')
-        print(self.ingridients)
+        self.ingridient.cost_drink('cappuccino')
+        print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
 
     def raf(self):
         self.storage_money.sale(self.cost_drinks['raf'])
         self.buyer.buy(self.cost_drinks['raf'])
-        self.ingridients.cost_drink('raf')
-        print(self.ingridients)
+        self.ingridient.cost_drink('raf')
+        print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
 
-    def check(self):
-        ...
+    # def can_cook(self, drink):
+    #     if self.ingridient.cost_drink(drink):
+    #         return True
 
     def start(self):
-        start = input("Enter the drink you would like: \n 1. americano \n 2. espresso \n 3. cappuccino \n 4. raf \n")
+        print(self.check('raf'))
+
+        if self.check('americano'):
+            print("1. americano")
+        if self.check('espresso'):
+            print("2. espresso")
+        if self.check('cappuccino'):
+            print("3. cappuccino")
+        if self.check('raf'):
+            print("4. raf")
+
+        start = input('Введите номер напитка: \n')
 
         if start == "1":
             self.americano()
