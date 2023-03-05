@@ -33,6 +33,8 @@ class Buyer:
         if self.money >= cost:
             self.money -= cost
             return True
+        else:
+            raise ("Недостаточно денег для оплаты")
 
     def __str__(self):
         return f'money - {self.money}'
@@ -42,7 +44,7 @@ class CoffeeMachine:
     cost_drinks = {'americano': 10,
                    'espresso': 5,
                    'cappuccino': 20,
-                   'raf': 20}
+                   'raf': 50}
 
     def __init__(self):
         self.ingridient = StorageIngridients()
@@ -62,7 +64,6 @@ class CoffeeMachine:
         print(self.ingridient)
         print(self.buyer)
         print(self.storage_money)
-
 
     def start(self):
         print(self.check('raf'))
