@@ -9,18 +9,14 @@
 class StorageIngridients:
     count_drink = {'americano': {'water': 10, 'coffee': 10, 'milk': 0, 'syrup': 0},
                    'espresso': {'water': 5, 'coffee': 10, 'milk': 0, 'syrup': 0},
-                   'cappuccino': {'water': 5, 'coffee': 10, 'milk': 10, 'syrup': 0},
-                   'raf': {'water': 5, 'coffee': 50, 'milk': 10, 'syrup': 5}}
+                   'cappuccino': {'water': 10, 'coffee': 10, 'milk': 10, 'syrup': 0},
+                   'raf': {'water': 10, 'coffee': 20, 'milk': 10, 'syrup': 5}}
 
-    ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 0}
+    ingridients = {'water': 100, 'coffee': 100, 'milk': 100, 'syrup': 100}
 
     def cost_drink(self, drink):
         for a, b in self.ingridients.items():
-            if self.ingridients[a] >= self.count_drink[drink][a]:
-                self.ingridients[a] -= self.count_drink[drink][a]
-                return True
-            else:
-                return False
+            self.ingridients[a] -= self.count_drink[drink][a]
 
     def __str__(self):
         return f'ingridients - {self.ingridients}'
@@ -99,10 +95,6 @@ class CoffeeMachine:
         print(self.buyer)
         print(self.storage_money)
 
-    # def can_cook(self, drink):
-    #     if self.ingridient.cost_drink(drink):
-    #         return True
-
     def start(self):
         print(self.check('raf'))
 
@@ -131,4 +123,3 @@ coffee = CoffeeMachine()
 
 while True:
     coffee.start()
-
